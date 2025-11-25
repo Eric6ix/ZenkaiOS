@@ -1,0 +1,12 @@
+[global]
+font=JetBrainsMono NFP:size=10
+anchor=top-right
+width=320
+margin=10
+padding=6
+background=#11111b
+foreground=#cdd6f4
+border-size=2
+border-color=#89b4fa
+max-notifications=4
+ignore-timeout=0

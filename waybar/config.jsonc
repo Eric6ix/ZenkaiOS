@@ -1,0 +1,146 @@
+{
+  "layer": "bottom",
+  "position": "top",
+  "height": 40,
+  "spacing": 2,
+  "exclusive": true,
+  "gtk-layer-shell": true,
+  "passthrough": false,
+  "fixed-center": true,
+  "modules-left": ["custom/launcher", "hyprland/workspaces", "cpu", "memory", "hyprland/window"],
+  "modules-center": ["battery","network","custom/network-traffic"],
+  "modules-right": [
+    "custom/player",
+    "cava",
+    "pulseaudio",
+    "clock",
+    "clock#simpleclock",
+  ],
+
+"hyprland/workspaces": {
+	"active-only": false,
+	"all-outputs": true,
+	"format": "{icon}",
+	"show-special": true,
+	"persistent-workspaces": {
+		"1": [],
+		"2": [],
+		"3": [],
+		"4": [],
+        "5": []
+	},
+},
+  "hyprland/window": {
+    "format": "{title}",
+  },
+  "tray": {
+    "show-passive-items": true,
+    "spacing": 10,
+  },
+  "clock#simpleclock": {
+    "tooltip": false,
+    "format": " {:%H:%M}",
+  },
+  "clock": {
+    "format": " {:L%a %d %b}",
+    "calendar": {
+      "format": {
+        "days": "<span weight='normal'>{}</span>",
+        "months": "<span color='#cdd6f4'><b>{}</b></span>",
+        "today": "<span color='#f38ba8' weight='700'><u>{}</u></span>",
+        "weekdays": "<span color='#f9e2af'><b>{}</b></span>",
+        "weeks": "<span color='#a6e3a1'><b>W{}</b></span>",
+      },
+      "mode": "month",
+      "mode-mon-col": 1,
+      "on-scroll": 1,
+    },
+    "tooltip-format": "<span color='#cdd6f4' font='Lexend 16'><tt><small>{calendar}</small></tt></span>",
+  },
+"cpu": {
+        "interval": 1,
+        "format": "CPU {usage:>2}% {icon0}{icon1}{icon2}{icon3}",
+        "format-icons": [
+            "▁",
+            "▂",
+            "▃",
+            "▄",
+            "▅",
+            "▆",
+            "▇",
+            "█"
+        ],
+        "on-click": "kitty -e btop"
+    },
+    "memory": {
+        "interval": 30,
+        "format": "MEM  {used:0.1f}G/{total:0.1f}G"
+  },
+  "pulseaudio": {
+    "format": "{icon} {volume}%",
+    "format-muted": "  muted",
+    "format-icons": {
+      "headphone": "",
+      "default": [" ", " ", " "],
+    },
+    "on-click": "pavucontrol",
+  },
+  "custom/sep": {
+    "format": "|",
+    "tooltip": false,
+  },
+    "custom/launcher": {
+	"format": "  ",
+	"tooltip": false,
+	"on-click": "/home/tdm/.config/rofi/launchers/type-2/launcher.sh",
+  "on-click-right": "/home/tdm/.config/waybar/scripts/swww.sh /home/tdm/Pictures/Wallpapers/ &"
+ },
+"custom/player": {
+    "format": "{}",
+    "return-type": "json",
+    "exec": "bash ~/.config/waybar/scripts/player.sh",
+    "interval": 2,
+    "on-click": "playerctl play-pause",
+    "on-click-right": "playerctl stop",
+    "-on-click-middle": "playerctl next",
+    "on-scroll-up": "playerctl previous",
+    "on-scroll-down": "playerctl next"
+},
+"network": {
+    "format": "{ifname}",
+    "format-wifi": "  {essid}",
+    "format-ethernet": " Ethernet", 
+    "format-disconnected": " Offline",
+    "on-click": "nm-connection-editor"
+},
+"custom/network-traffic": {
+    "format": "{}", 
+    "exec": "bash ~/.config/waybar/scripts/network-traffic.sh",
+    "interval": 2
+},
+    "on-click": "sleep 0.1 && swaync-client -t -sw",
+    "return-type": "json",
+    "tooltip": false,
+  
+      "battery": {
+        "states": {
+            "full": 100,
+            "great": 97,
+            "good": 85,
+            "ok": 50,
+            "warning": 30,
+            "low": 20,
+            "critical": 10
+        },
+        "format": "{icon}  {capacity}",
+        "format-charging": "  {capacity}%",
+        "format-plugged": "  {capacity}%",
+        // "format-good": "", // An empty format will hide the module
+        // "format-full": "",
+        "format-icons": ["", "", "", "", ""]
+        //"format-alt": "{time}",
+    },
+    
+}
+  
+

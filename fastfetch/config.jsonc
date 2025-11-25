@@ -1,0 +1,26 @@
+{
+  "logo": {
+    "source": "arch_small",
+    "padding": {
+      "top": 1,
+      "right": 2
+    }
+  },
+  "displaySeparator": "  ",
+  "modules": [
+    { "type": "title" },
+    { "type": "os" },
+    { "type": "kernel" },
+    { "type": "wm" },
+    { "type": "gpu" },
+    { "type": "memory" },
+    { "type": "disk" },
+    { "type": "battery" },
+    { "type": "locale" },
+    { "type": "localip" }
+  ],
+  "colors": {
+    "text": "bright-white",
+    "bar": "cyan"
+  }
+}
