@@ -1,9 +1,9 @@
-#!/bin/bash
+  #!/bin/bash
 
 interface=$(ip route | grep default | awk '{print $5}' | head -1)
 
 if [ -z "$interface" ]; then
-    echo " Offline"
+    echo "󱞯 Offline"
     exit 0
 fi
 
@@ -33,4 +33,4 @@ else
     tx_display=$(echo "scale=1; $tx_speed/1024" | bc)MB
 fi
 
-echo " $rx_display  $tx_display"
+echo "󱦴 $rx_display 󱦶 $tx_display"
