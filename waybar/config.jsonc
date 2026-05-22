@@ -4,13 +4,21 @@
   "height": 50,
   "spacing": 2,
 
-  "modules-left": ["custom/launcher", "hyprland/workspaces"],
+  "modules-left": ["custom/launcher", "tray", "hyprland/workspaces"],
   "modules-center": ["battery", "network", "custom/network-traffic"],
-  "modules-right": ["custom/player", "memory", "cpu", "pulseaudio", "clock", "clock#simpleclock"],
+  "modules-right": [
+    "custom/player",
+    "memory",
+    "cpu",
+    "pulseaudio",
+    "clock",
+    "clock#simpleclock", ],
 
   "custom/launcher": {
     "format": "  ",
-    "on-click": "wofi --show drun"
+    "on-click": "wofi --show drun",
+    "active": "󱓻",
+    "urgent": "󱓻",
   },
 
   "custom/windows": {
@@ -18,17 +26,17 @@
     "return-type": "json",
     "interval": 2,
     "on-click": "rofi -show window",
-    "tooltip": true
+    "tooltip": true,
   },
 
   "hyprland/workspaces": {
     "active-only": true,
     "all-outputs": true,
     "format": "{icon}",
-    "show-special": true
+    "show-special": true,
   },
 
-"custom/player": {
+  "custom/player": {
     "format": "{}",
     "return-type": "json",
     "exec": "bash ~/.config/waybar/scripts/player.sh",
@@ -37,8 +45,8 @@
     "on-click-right": "playerctl stop",
     "-on-click-middle": "playerctl next",
     "on-scroll-up": "playerctl previous",
-    "on-scroll-down": "playerctl next"
-},
+    "on-scroll-down": "playerctl next",
+  },
 
   "network": {
     "format": "{icon}",
@@ -47,33 +55,35 @@
     "format-disconnected": "",
     "tooltip-format": "󰢭 {essid}\n󰩠 {ipaddr}\n󰀂 {signalStrength}%",
     "format-icons": ["󰤯", "󰤟", "󰤢", "󰤥", "󰤨"],
-    "on-click": "nm-connection-editor"
+    "on-click": "nm-connection-editor",
   },
 
   "custom/network-traffic": {
     "exec": "bash ~/.config/waybar/scripts/network-traffic.sh",
     "interval": 2,
-    "return-type": "json"
+    "return-type": "json",
   },
 
   "cpu": {
     "interval": 1,
     "format": " {usage:>2}% {icon0}{icon1}{icon2}{icon3}",
-    "format-icons": ["▁","▂","▃","▄","▅","▆","▇","█"],
-    "on-click": "kitty -e btop"
+    "format-icons": ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█"],
+    "on-click": "kitty -e btop",
   },
 
   "memory": {
     "interval": 30,
-    "format": " {used:0.1f}G/{total:0.1f}G"
+    "format": " {used:0.1f}G/{total:0.1f}G",
   },
 
   "pulseaudio": {
     "format": "{icon} {volume}%",
-    "format-muted": " muted",
+    "format-muted": "  muted",
     "format-icons": {
-      "default": ["","",""]
-    }
+      "headphone": "",
+      "default": [" ", " ", " "],
+    },
+    "on-click": "pavucontrol",
   },
 
   "clock": {
@@ -93,10 +103,9 @@
     "tooltip-format": "<span color='#cdd6f4' font='Lexend 16'><tt><small>{calendar}</small></tt></span>",
   },
 
-
   "clock#simpleclock": {
     "tooltip": false,
-    "format": " {:%H:%M}"
+    "format": " {:%H:%M}",
   },
 
   "battery": {
@@ -110,7 +119,7 @@
       "warning": 30,
       "critical": 15,
     },
-    "format": "󰂎 {capacity}%",
+    "format": "󰁹 {capacity}%",
     "format-charging": "󰂄 {capacity}%",
     "format-plugged": " {capacity}%",
     "format-alt-click": "click",
@@ -119,6 +128,9 @@
     "format-icons": ["󰂎", "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"],
     "format-time": "{H}h {M}min",
     "tooltip": true,
-    "tooltip-format": "{timeTo} {power}w",// tem como detectar o tempo e woltagem 
+    "tooltip-format": "{timeTo} {power}w", // tem como detectar o tempo e woltagem
   },
+      "tray": {
+        "spacing": 10
+    },
 }
