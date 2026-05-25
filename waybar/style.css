@@ -1,153 +1,116 @@
-/* =============================================================================
-   Waybar — Hyprland
-   Base escura com acentos estilo Catppuccin; módulos em "chips" arredondados.
-   Referência: IDs seguem o nome do módulo no config.jsonc (#pulseaudio, etc.).
-   ============================================================================= */
-
-/* ═══════════════════════════════════════════════════════════════════════════
-   1. PALETA (tokens GTK — use @nome nas propriedades)
-   ═══════════════════════════════════════════════════════════════════════════ */
-@define-color bg_bar       rgba(37, 37, 37, 0.455);
-@define-color bg_chip      #1e1e2e;
-@define-color fg_default   #cdd6f4;
-@define-color fg_subtle    #9399b2;
-@define-color fg_muted     #a6adc8;
-
-@define-color accent_blue      #89b4fa;
-@define-color accent_sky       #74c7ec;
-@define-color accent_teal      #94e2d5;
-@define-color accent_mauve     #cba6f7;
-@define-color accent_green     #a6e3a1;
-@define-color accent_red       #f38ba8;
-@define-color accent_yellow    #f9e2af;
-@define-color accent_lavender       #b4befe;
-@define-color accent_lavender_soft  #dbbdff;
-
-@define-color accent_workspace #839ae6;
-@define-color tooltip_bg       #181825;
-@define-color sep              #585b70;
-
-/* ═══════════════════════════════════════════════════════════════════════════
-   2. RESET & TIPOGRAFIA BASE
-   ═══════════════════════════════════════════════════════════════════════════ */
+/* -- Global rules -- */
 * {
-  min-height: 0;
-  min-width: 0;
-  font-family: Lexend, "JetBrainsMono NFP";
-  font-size: 14px;
-  font-weight: 600;
+  border: none;
+  font-family: "JetbrainsMono Nerd Font";
+  font-size: 15px;
+  min-height: 10px;
 }
 
-/* ═══════════════════════════════════════════════════════════════════════════
-   3. BARRA PRINCIPAL
-   ═══════════════════════════════════════════════════════════════════════════ */
 window#waybar {
-  background-color: @bg_bar;
-  transition-property: background-color;
-  transition-duration: 1.5s;
+  background: transparent;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
-/* ═══════════════════════════════════════════════════════════════════════════
-   4. WORKSPACES (botões por workspace — ícones do format do módulo)
-   ═══════════════════════════════════════════════════════════════════════════ */
+window#waybar.hidden {
+  opacity: 3.2;
+}
+#custom-archIcon{
+color: #ffffff;
+}
+/* - Genera rules for visible modules -- */
+#clock,
+#custom-linuxIcon,
+#custom-network-traffic,
+#custom-midia,
+#memory,
+#cpu,
+#battery,
+#temperature,
+#pulseaudio,
+#idle_inhibitor {
+  background-color: #000000;
+  color: #ffffff;
+  margin-top: 6px;
+  margin-bottom: 6px;
+  padding-left: 10px;
+  padding-right: 10px;
+  transition: none;
+  border-radius: 20px;
+}
+
+#custom-linuxIcon,
+#network {
+  margin-top: 6px;
+  margin-bottom: 6px;
+  padding-left: 15px;
+  padding-right: 20px;
+  transition: none;
+  border-radius: 20px;
+  background-color: #000000;
+  color: #ffffff;
+}
+
+#custom-linuxIcon {
+  margin-left: 20px;
+}
+
+#clock {
+  margin-right: 20px;
+}
+
+#custom-archIcon,
+#workspaces,
+#group-ws {
+  color: #000000;
+  background: #333333;
+  border-radius: 20px;
+  margin: 6px 8px;
+  padding: 0px 20px;
+}
+
 #workspaces button {
-  margin: 0.4rem 0.25rem;
-  padding: 0.3rem 0.6rem;
-  border-radius: 6px;
-  background-color: @bg_chip;
-  color: @accent_workspace;
+  color: #ffffff;
+  background: transparent;
+  padding: 4px 4px;
+  transition:
+    color 0.5s ease,
+    text-shadow 0.5s ease,
+    transform 0.5s ease;
 }
 
-#workspaces button:hover {
-  background-color: @fg_default;
-  color: @bg_chip;
+#workspaces button.occupied {
+  color: #a6e3a1;
 }
 
 #workspaces button.active {
-  background-color: @bg_chip;
-  border-color: #fff;
-  color: #fff;
+  color: #89b4fa;
+  text-shadow: 0 4px #abe9b3;
 }
 
-#workspaces button.urgent {
-  background-color: @bg_chip;
-  color: @accent_red;
+#workspaces button:hover {
+  color: #89b4fa;
 }
 
-/* ═══════════════════════════════════════════════════════════════════════════
-   5. MÓDULOS — CHIPS COMPARTILHADOS
-      (relógio, CPU, rede, player, launcher, notificações, etc.)
-   ═══════════════════════════════════════════════════════════════════════════ */
-#clock,
-#pulseaudio,
-#custom-logo,
-#custom-power,
-#custom-spotify,
-#custom-notification,
-#cpu,
-#tray,
-#memory,
-#window,
-#battery,
-#custom-network-traffic,
-#mpris,
-#network,
-#custom-launcher,
-#custom-player {
-  margin: 0.4rem 0.25rem;
-  padding: 0.3rem 0.6rem;
+/*taskbar###########*/
+#taskbar {
+  background: transparent;
+  border-radius: 10px;
+  padding: 0px 10px;
+  margin: 6px 5px;
+}
+
+#taskbar button {
+  padding: 0px 5px;
+  margin: 0px 3px;
   border-radius: 6px;
-  background-color: @bg_chip;
+  transition: background 0.3s ease;
 }
 
-/* ═══════════════════════════════════════════════════════════════════════════
-   6. CORES POR MÓDULO (identidade visual na barra)
-   ═══════════════════════════════════════════════════════════════════════════ */
-#cpu       { color: @accent_teal; }
-#memory    { color: @accent_mauve; }
-#clock     { color: @accent_sky; }
-#window    { color: @fg_default; }
-
-#pulseaudio       { color: @accent_lavender; }
-#pulseaudio.muted { color: @fg_muted; }
-
-#network       { color: @accent_yellow; }
-#network.wifi       { color: @accent_green; }
-#network.ethernet   { color: @accent_blue; }
-#network.disconnected { color: @accent_red; }
-
-#custom-logo      { color: #0e6aff; }
-#custom-launcher  { color: #0037ff; border-radius: 8px; }
-#custom-player    { color: #00ff04; padding-left: 20px; }
-#custom-network-traffic { color: @accent_lavender_soft; font-size: 16px; }
-
-#battery { color: #ffffff; }
-
-/* Segundo relógio no config: clock#simpleclock → #clock.simpleclock */
-#clock.simpleclock { color: @accent_blue; }
-
-/* ═══════════════════════════════════════════════════════════════════════════
-   7. MPRIS — estados de reprodução
-   ═══════════════════════════════════════════════════════════════════════════ */
-#mpris.playing { color: @accent_green; }
-#mpris.paused  { color: @fg_subtle; }
-
-/* ═══════════════════════════════════════════════════════════════════════════
-   8. SOBRESCITAS ESPECIAIS
-   ═══════════════════════════════════════════════════════════════════════════ */
-/* Separador textual — só cor, sem padding extra */
-#custom-sep {
-  padding: 0;
-  color: @sep;
+#taskbar button.active {
+  background: rgba(34, 36, 54, 0.5);
 }
 
-/* Sem janela focada: esconde o fundo do módulo window */
-window#waybar.empty #window {
-  background-color: transparent;
-}
-
-/* Tooltips GTK (calendário do clock, etc.) */
-tooltip {
-  border: 2px solid @accent_blue;
-  background-color: @tooltip_bg;
+#taskbar button:hover {
+  background: rgba(34, 36, 54, 0.5);
 }
